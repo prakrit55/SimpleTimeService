@@ -53,7 +53,7 @@ jobs:
 
           jq --arg IMAGE "$IMAGE" '
             .containerDefinitions[0].image = $IMAGE |
-            del(.compatibilities, .registeredAt, .registeredBy, .requiresAttributes, .revision, .status, .taskDefinitionArn)
+            del(.compatibilities, .registeredAt, .registeredBy, .requiresAttributes, .revision, .status, .taskDefinitionArn, .tags)
           ' ecs-task-def.json > new-task-def.json
           echo "Generated task definition:"
           cat new-task-def.json
