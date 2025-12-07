@@ -45,16 +45,25 @@ jobs:
           IMAGE="${{ secrets.DOCKERHUB_USERNAME }}/simpletimeservice:$TAG"
           jq --arg IMAGE "$IMAGE" '.containerDefinitions[0].image=$IMAGE' ecs-task-def.json > new-task-def.json
 
+      - name: Fill in the new image ID in the ECS task definition
+        run: |
+          cd .github/ecs
+          TAG=${{ github.run_number }}
+          IMAGE="${{ secrets.DOCKERHUB_USERNAME }}/simpletimeservice:$TAG"
+
+          jq --arg IMAGE "$IMAGE" '
+            .containerDefinitions[0].image = $IMAGE |
+            del(.compatibilities, .registeredAt, .registeredBy, .requiresAttributes, .revision, .status, .taskDefinitionArn)
+          ' ecs-task-def.json > new-task-def.json
+          echo "Generated task definition:"
+          cat new-task-def.json
+
       - name: Register Task Definition
         id: taskdef
         run: |
           cd .github/ecs
-          TASK_DEF_ARN=$(aws ecs register-task-definition --cli-input-json file://new-task-def.json --query 'taskDefinition.taskDefinitionArn' --output text)
+          TASK_DEF_ARN=$(aws ecs register-task-definition \
+            --cli-input-json file://new-task-def.json \
+            --query 'taskDefinition.taskDefinitionArn' \
+            --output text)
           echo "TASK_DEF_ARN=$TASK_DEF_ARN" >> $GITHUB_OUTPUT
-
-      - name: Deploy new task to ECS
-        run: |
-          aws ecs update-service \
-            --cluster app-cluster \
-            --service my-service \
-            --task-definition ${{ steps.taskdef.outputs.TASK_DEF_ARN }}
