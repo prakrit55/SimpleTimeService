@@ -14,7 +14,7 @@ resource "aws_ecs_service" "simple_app_service" {
     }
 
     network_configuration {
-        subnets          = ["${aws_subnet.public-2.id}", "${aws_subnet.public-1.id}"]
+        subnets          = ["${aws_subnet.private_2.id}", "${aws_subnet.private_1.id}"]
         assign_public_ip = true
         security_groups  = ["${aws_security_group.service_security_group.id}"]
     }

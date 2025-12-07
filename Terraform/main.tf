@@ -15,15 +15,6 @@ terraform {
         dynamodb_table = "TfDynamoDBLock"
         encrypt        = true
     }
-    # backend "local" {
-    #     path = "terraform.tfstate"
-    # }
-}
-
-module "TF-state" {
-    source = "./modules/TF-State"
-    bucket_name = local.bucket1_name
-    table_name = local.table_name
 }
 
 module "ecsCluster" {
