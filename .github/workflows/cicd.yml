@@ -67,10 +67,10 @@ jobs:
             --query 'taskDefinition.taskDefinitionArn' \
             --output text)
           echo "TASK_DEF_ARN=$TASK_DEF_ARN" >> $GITHUB_OUTPUT
-          
+
       - name: Deploy new task to ECS
         run: |
           aws ecs update-service \
             --cluster app-cluster \
-            --service my-service \
+            --service app-service \
             --task-definition ${{ steps.taskdef.outputs.TASK_DEF_ARN }}
