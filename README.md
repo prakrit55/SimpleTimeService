@@ -1,5 +1,5 @@
 # SimpleTimeService
-
+```text
 SimpleTimeService/
 │
 ├── .github/
@@ -25,15 +25,15 @@ SimpleTimeService/
 ├── .gitignore
 ├── LICENSE
 └── README.md
-
+```
 ## Task 01
 
-***Clone the repo***(git must be installed, if not present install it from https://git-scm.com/install/windows)
+***Clone the repo*** (git must be installed, if not present install it from https://git-scm.com/install/windows)
 1. Create a directory - (Any Name)
 2. Open cmd into the directory
 3. Write the command, git clone https://github.com/prakrit55/SimpleTimeService.git
 
-***Building The Image*** (Make sure docker is installed, check by the command docker -v, if not present go to the official website https://docs.docker.com/engine/install/ and depending on your current os install docker)
+***Building The Image*** (Make sure docker is installed, check by the command docker -v, if not present go to the official website -> [Docker](https://docs.docker.com/engine/install/) and depending on your current os install docker)
 ```text
 1. cd SimpleTimeService
 2. cd app → Move into the directory containing your Dockerfile.
@@ -41,7 +41,8 @@ SimpleTimeService/
 ```
 ***Create the container and access the application***
 ```text
-1. docker run --name simpletimeservice -p 8080:8080 simpletimeservice → Run the container, mapping port 8080 inside the container to port 8080 on your host.
+1. docker run --name simpletimeservice -p 8080:8080 simpletimeservice 
+→ Run the container, mapping port 8080 inside the container to port 8080 on your host.
 2. Open the browser → Access your running service at localhost:8080
 ```
 ## Task 02
