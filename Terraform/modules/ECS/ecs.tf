@@ -8,7 +8,7 @@ resource "aws_ecs_task_definition" "simple_app_task" {
     [
         {
             "name": "${var.simple_app_task_name}",
-            "image": "${var.docker_hub}:latest",
+            "image": "${var.docker_hub}:6",
             "essential": true,
             "portMappings": [
             {

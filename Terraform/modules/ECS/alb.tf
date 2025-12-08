@@ -43,13 +43,6 @@ resource "aws_security_group" "alb_sg" {
         cidr_blocks = ["0.0.0.0/0"]
     }
 
-    ingress {
-        from_port   = 0
-        to_port     = 0
-        protocol    = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
-    }
-
     egress {
         from_port   = 0
         to_port     = 0
@@ -60,12 +53,4 @@ resource "aws_security_group" "alb_sg" {
 
 output "alb_dns_name" {
     value = aws_alb.simple-alb.dns_name
-}
-
-output "aws_security_group" {
-    value = aws_security_group.alb_sg.id
-}
-
-output "aws_alb_listener" {
-    value = aws_alb_listener.listener.arn
 }
